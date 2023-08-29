@@ -9,16 +9,26 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class StackoverflowTwApplication {
+    private static final String USER_NAME = "USER_NAME";
+    private static final String PASSWORD = "PASSWORD";
+    private static final String DATABASE_NAME = "DATABASE_NAME";
+
 
     public static void main(String[] args) {
+
         SpringApplication.run(StackoverflowTwApplication.class, args);
     }
 
     @Bean
     public QuestionsDAO questionsDAO() {
-        Connection connection = new Connection("stackoverflow","postgres","CsabInez91915","jdbc:postgresql://localhost:1991/");
+        String dbName = System.getenv(DATABASE_NAME);
+        String userName = System.getenv(USER_NAME);
+        String password = System.getenv(PASSWORD);
+        String URL = "jdbc:postgresql://localhost:5432/" + dbName;
+
+        Connection connection = new Connection(dbName, userName, password,URL);
         Connection databaseConnection = connection.getConnection();
 
-        return new QuestionsDaoJdbc(connection);
+        return new QuestionsDaoJdbc(databaseConnection);
     }
 }
