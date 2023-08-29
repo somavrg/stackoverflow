@@ -1,8 +1,16 @@
 package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
+import com.codecool.stackoverflowtw.database.Connection;
 
 public class QuestionsDaoJdbc implements QuestionsDAO {
+
+    private final Connection connection;
+
+    public QuestionsDaoJdbc(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public void sayHi() {
         System.out.println("Hi DAO!");
