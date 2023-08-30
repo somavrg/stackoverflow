@@ -54,7 +54,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
 
     @Override
     public Question selectById(int id) {
-        String sql = "SELECT id, title, description, date, score FROM questions WHERE id= ?";
+        String sql = "SELECT id, title, description, date, score FROM questions WHERE id = ?";
 
         try (Connection conn = connection;
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -72,7 +72,9 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
                 return new Question(questionId, title, description, dateTime, score);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Error executing SQL query: " + sql);
+            e.printStackTrace();
+            throw new RuntimeException("An error occurred while fetching the question.", e);
         }
 
         return null;
