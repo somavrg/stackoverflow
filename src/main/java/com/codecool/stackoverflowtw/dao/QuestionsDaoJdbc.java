@@ -54,7 +54,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
 
     @Override
     public Question selectById(int id) {
-        String sql = "SELECT id, title, description, date FROM questions WHERE id= ?";
+        String sql = "SELECT id, title, description, date, score FROM questions WHERE id= ?";
 
         try (Connection conn = connection;
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
