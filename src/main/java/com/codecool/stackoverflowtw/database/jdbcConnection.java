@@ -3,14 +3,14 @@ package com.codecool.stackoverflowtw.database;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Connection {
+public class jdbcConnection {
 
     private final String dbName;
     private final String userName;
     private final String password;
     private final String url;
 
-    public Connection(String dbName, String userName, String password, String url) {
+    public jdbcConnection(String dbName, String userName, String password, String url) {
         this.dbName = dbName;
         this.userName = userName;
         this.password = password;

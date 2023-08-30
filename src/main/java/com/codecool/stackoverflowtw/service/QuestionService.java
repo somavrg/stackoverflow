@@ -46,5 +46,6 @@ public class QuestionService {
     public int addNewQuestion(NewQuestionDTO question) {
         questionsDAO.addNewQuestion(question);
         return 0;
+
     }
 }
