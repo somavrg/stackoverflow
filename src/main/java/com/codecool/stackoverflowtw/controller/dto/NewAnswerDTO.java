@@ -1,3 +1,3 @@
 package com.codecool.stackoverflowtw.controller.dto;
 
-public record NewAnswerDTO(String text) {}
+public record NewAnswerDTO(String text,int questionID) {}
