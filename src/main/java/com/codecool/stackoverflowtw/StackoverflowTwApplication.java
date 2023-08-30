@@ -27,7 +27,7 @@ public class StackoverflowTwApplication {
         String URL = "jdbc:postgresql://localhost:5432/" + dbName;
 
         Connection connection = new Connection(dbName, userName, password,URL);
-        Connection databaseConnection = connection.getConnection();
+        java.sql.Connection databaseConnection = connection.getConnection();
 
         return new QuestionsDaoJdbc(databaseConnection);
     }
