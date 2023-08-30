@@ -1,6 +1,7 @@
 package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
+
 import com.codecool.stackoverflowtw.dao.model.Question;
 
 import java.sql.Connection;
@@ -10,6 +11,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+
+
+
 
 public class QuestionsDaoJdbc implements QuestionsDAO {
 
