@@ -43,7 +43,7 @@ public class AnswerService {
         return new AnswerDTO(answerId,text,createdDate,questionID,score);
     }
 
-    public void deleteAllById(int questionId) {
+    public void deleteAllByQuestionId(int questionId) {
         answerDAO.deleteAllById(questionId);
     }
 
