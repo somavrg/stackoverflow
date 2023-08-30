@@ -106,13 +106,14 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, question.title());
                 pstmt.setString(2, question.description());
-                pstmt.setString(3, question.description());
+                pstmt.setString(3, String.valueOf(LocalDate.now()));
 
 
                 pstmt.executeUpdate();
 
             }
         } catch (SQLException e) {
+            throw new RuntimeException();
         }
     }
 }
