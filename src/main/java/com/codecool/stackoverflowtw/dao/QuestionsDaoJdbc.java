@@ -1,20 +1,15 @@
 package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
-
 import com.codecool.stackoverflowtw.dao.model.Question;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-
-
-
 
 public class QuestionsDaoJdbc implements QuestionsDAO {
 
@@ -35,10 +30,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
         String sql = "SELECT id, title, description, date FROM questions";
 
         try (Connection conn = connection;
-
-             PreparedStatement pstmt = conn.prepareStatement(sql)
-
-        ) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             ResultSet res = pstmt.executeQuery();
 
@@ -46,8 +38,8 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
                 int questionId = res.getInt("id");
                 String title = res.getString("title");
                 String description = res.getString("description");
-                LocalDate date = res.getDate("date").toLocalDate();
-                Question question = new Question(questionId, title, description, date);
+                LocalDateTime dateTime = res.getTimestamp("date").toLocalDateTime();
+                Question question = new Question(questionId, title, description, dateTime);
 
                 questions.add(question);
             }
@@ -64,32 +56,26 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
     public Question selectById(int id) {
         String sql = "SELECT id, title, description, date FROM questions WHERE id= ?";
 
-        try (java.sql.Connection conn = connection;
-             PreparedStatement pstmt = conn.prepareStatement(sql)
-        ) {
+        try (Connection conn = connection;
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
-
 
             ResultSet res = pstmt.executeQuery();
 
-
             if (res.next()) {
-
                 int questionId = res.getInt("id");
                 String title = res.getString("title");
                 String description = res.getString("description");
-                LocalDate date = res.getDate("date").toLocalDate();
-                return new Question(questionId, title, description, date);
-            }
+                LocalDateTime dateTime = res.getTimestamp("date").toLocalDateTime();
 
+                return new Question(questionId, title, description, dateTime);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-
         return null;
     }
-
 
     @Override
     public void deleteQuestionById(int id) {
@@ -111,7 +97,6 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
 
     @Override
     public void addNewQuestion(NewQuestionDTO question) {
-
         String sql = "INSERT INTO questions (title, description,date) VALUES (?, ?, ?)";
 
         try (Connection conn = connection) {
@@ -121,9 +106,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
                 pstmt.setString(2, question.description());
                 pstmt.setString(3, String.valueOf(LocalDate.now()));
 
-
                 pstmt.executeUpdate();
-
             }
         } catch (SQLException e) {
             throw new RuntimeException();
