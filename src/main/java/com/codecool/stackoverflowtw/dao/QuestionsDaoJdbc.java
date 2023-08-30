@@ -78,7 +78,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
     }
 
     @Override
-    public void deleteQuestionById(int id) {
+    public boolean deleteQuestionById(int id) {
         String sql = "DELETE FROM questions WHERE id = ?";
 
         try (Connection conn = connection) {
@@ -88,10 +88,10 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
 
 
                 pstmt.executeUpdate();
-
+                return true;
             }
         } catch (SQLException e) {
-            throw new RuntimeException();
+            return false;
         }
     }
 

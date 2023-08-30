@@ -6,4 +6,6 @@ public record QuestionDTO(
         int id,
         String title,
         String description,
-        LocalDateTime created) {}
+        LocalDateTime created,
+        int score) {
+}
