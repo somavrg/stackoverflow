@@ -2,7 +2,6 @@ package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.NewAnswerDTO;
 import com.codecool.stackoverflowtw.dao.model.Answer;
-import com.codecool.stackoverflowtw.dao.model.Question;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,13 +48,39 @@ public class AnswerDaoJdbc implements  AnswerDAO{
 
     @Override
     public void deleteAllById(int id) {
+        String sql = "DELETE FROM answers WHERE question_id = ?";
+
+        try (Connection conn = connection) {
+            assert conn != null;
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, id);
+
+
+                pstmt.executeUpdate();
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
 
     }
 
     @Override
     public void deleteAnswerById(int id) {
+        String sql = "DELETE FROM answers WHERE answers.id = ?";
+
+        try (Connection conn = connection) {
+            assert conn != null;
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, id);
 
 
+                pstmt.executeUpdate();
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
 
     @Override
