@@ -25,7 +25,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
     @Override
     public List<Question> selectAll() {
         List<Question> questions = new ArrayList<>();
-        String sql = "SELECT id, title, description, date FROM questions";
+        String sql = "SELECT id, title, description, date, score FROM questions";
 
         try (Connection conn = connection;
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -44,6 +44,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
             }
 
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
 
