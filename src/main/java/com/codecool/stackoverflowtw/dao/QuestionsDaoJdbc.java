@@ -79,7 +79,20 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
 
     @Override
     public void deleteQuestionById(int id) {
+        String sql = "DELETE FROM questions WHERE id = ?";
 
+        try (Connection conn = connection) {
+            assert conn != null;
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, id);
+
+
+                pstmt.executeUpdate();
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
 
     @Override
