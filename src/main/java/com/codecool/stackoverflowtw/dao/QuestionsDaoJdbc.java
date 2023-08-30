@@ -97,7 +97,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
 
     @Override
     public void addNewQuestion(NewQuestionDTO question) {
-        String sql = "INSERT INTO questions (title, description, date, score) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO questions (title, description, date) VALUES (?, ?, ?)";
 
         try (Connection conn = connection) {
             assert conn != null;
