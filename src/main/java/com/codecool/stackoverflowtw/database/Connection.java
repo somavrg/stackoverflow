@@ -19,10 +19,9 @@ public class Connection {
         this.url = url;
     }
 
-    public Connection getConnection() {
+    public java.sql.Connection getConnection() {
         try {
-
-            return (Connection) DriverManager.getConnection(url, userName, password);
+            return  DriverManager.getConnection(url, userName, password);
         } catch (SQLException ex) {
             System.err.println("Could not create database connection.");
             throw new RuntimeException(ex);
