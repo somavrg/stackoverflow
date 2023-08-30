@@ -3,10 +3,7 @@ package com.codecool.stackoverflowtw.dao;
 import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
 import com.codecool.stackoverflowtw.dao.model.Question;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -107,7 +104,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, question.title());
                 pstmt.setString(2, question.description());
-                pstmt.setString(3, String.valueOf(LocalDateTime.now()));
+                pstmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
 
                 pstmt.executeUpdate();
             }
