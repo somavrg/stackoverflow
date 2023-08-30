@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class QuestionService {
 
-    private QuestionsDAO questionsDAO;
+    private final QuestionsDAO questionsDAO;
 
     @Autowired
     public QuestionService(QuestionsDAO questionsDAO) {
@@ -20,24 +20,32 @@ public class QuestionService {
     }
 
     public List<QuestionDTO> getAllQuestions() {
-        // TODO
-        return List.of(new QuestionDTO(1, "example title", "example desc", LocalDateTime.now()));
+        return questionsDAO.selectAll().stream()
+                .map(question -> {
+                    int id = question.questionId();
+                    String title = question.title();
+                    String description = question.description();
+                    LocalDateTime createdDate = question.dateTime();
+                    int score = question.score();
+                    return new QuestionDTO(id, title, description, createdDate, score);
+                }).toList();
     }
 
     public QuestionDTO getQuestionById(int id) {
-        // TODO
-        questionsDAO.sayHi();
-        return new QuestionDTO(id, "example title", "example desc", LocalDateTime.now());
+        String title = questionsDAO.selectById(id).title();
+        String description = questionsDAO.selectById(id).description();
+        LocalDateTime createdDate = questionsDAO.selectById(id).dateTime();
+        int score = questionsDAO.selectById(id).score();
+        return new QuestionDTO(id, title, description, createdDate, score);
     }
 
     public boolean deleteQuestionById(int id) {
-        // TODO
-        return false;
+       return questionsDAO.deleteQuestionById(id);
     }
 
     public int addNewQuestion(NewQuestionDTO question) {
-        // TODO
-        int createdId = 0;
-        return createdId;
+        questionsDAO.addNewQuestion(question);
+        return 0;
+
     }
 }

@@ -2,6 +2,7 @@ package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.NewAnswerDTO;
 import com.codecool.stackoverflowtw.dao.model.Answer;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,27 @@ public class AnswerDaoJdbc implements AnswerDAO {
 
     public AnswerDaoJdbc(Connection connection) {
         this.connection = connection;
+    }
+
+    @Override
+    public Answer selectAnswerById(int id) {
+        String sql = "SELECT id,text,date,score FROM answers WHERE id = ?";
+
+        try (Connection conn = connection) {
+            assert conn != null;
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, id);
+                ResultSet res = pstmt.executeQuery();
+                int answerId = res.getInt("id");
+                String text = res.getString("text");
+                LocalDateTime dateTime = res.getTimestamp("date").toLocalDateTime();
+                int score = res.getInt("score");
+                int questionId = res.getInt("question_id");
+                return new Answer(answerId, text, dateTime, score, questionId);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
 
     @Override

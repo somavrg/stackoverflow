@@ -6,6 +6,7 @@ import com.codecool.stackoverflowtw.dao.model.Answer;
 import java.util.List;
 
 public interface AnswerDAO {
+    Answer selectAnswerById(int id);
     List<Answer> selectAllById(int id);
 
     void deleteAllById(int id);
