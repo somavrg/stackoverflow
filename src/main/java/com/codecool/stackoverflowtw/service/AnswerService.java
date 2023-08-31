@@ -58,4 +58,6 @@ public class AnswerService {
     public int getNumberOfAnswers() {
         return answerDAO.getNumberOfAnswers();
     }
+
+    public void voteAnswer(int id, int voteValue) { answerDAO.voteAnswer(id, voteValue);}
 }
