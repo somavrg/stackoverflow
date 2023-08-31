@@ -32,4 +32,7 @@ public class AnswerController {
     public void deleteAnswerById(@PathVariable int id) {
         answerService.deleteAnswerById(id);
     }
+
+    @GetMapping("/numberOfAnswers")
+    public int getNumberOfAnswers() { return answerService.getNumberOfAnswers(); }
 }
