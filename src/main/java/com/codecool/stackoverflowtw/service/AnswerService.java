@@ -22,15 +22,13 @@ public class AnswerService {
 
     public List<AnswerDTO> getAnswersById(int questionID) {
         List<AnswerDTO> answerDTOS = new ArrayList<>();
+        answerDAO.selectAllById(questionID).forEach(answer ->{
+        String text = answer.text();
+        LocalDateTime createdDate = answer.dateTime();
+        int score = answer.score();
+        int id = answer.answerId();
+        answerDTOS.add(new AnswerDTO(id, text, createdDate, questionID, score));});
 
-        while (answerDAO.selectAllById(questionID).iterator().hasNext()) {
-            Answer answer = answerDAO.selectAllById(questionID).iterator().next();
-            String text = answer.text();
-            LocalDateTime createdDate = answer.dateTime();
-            int score = answer.score();
-            int id = answer.answerId();
-            answerDTOS.add(new AnswerDTO(id, text, createdDate, questionID, score));
-        }
         return answerDTOS;
     }
 
