@@ -140,16 +140,13 @@ public class QuestionsDAOJdbc implements QuestionsDAO {
 
     @Override
     public void voteQuestion(int id, int voteValue) {
-        String sql = "UPDATE questions SET score = score + voteValue";
+        String sql = "UPDATE questions SET score = (score + ?) WHERE questions.id = ?";
 
         try (Connection conn = jdbcConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            ResultSet res = pstmt.executeQuery();
-
-            while (res.next()) {
-                int questionId = res.getInt("id");
-            }
+            pstmt.setInt(1,voteValue);
+            pstmt.setInt(2,id);
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
