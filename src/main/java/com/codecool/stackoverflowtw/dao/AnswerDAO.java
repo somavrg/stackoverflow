@@ -15,4 +15,5 @@ public interface AnswerDAO {
 
     void addNewAnswer(NewAnswerDTO newAnswerDTO);
     int getNumberOfAnswers();
+    void voteAnswer(int id, int voteNumber);
 }
