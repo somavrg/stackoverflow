@@ -23,26 +23,26 @@ public class StackoverflowTwApplication {
         SpringApplication.run(StackoverflowTwApplication.class, args);
     }
 
-    private static Connection getConnection() {
+    private static jdbcConnection getConnection() {
         String dbName = System.getenv(DATABASE_NAME);
         String userName = System.getenv(USER_NAME);
         String password = System.getenv(PASSWORD);
         String URL = "jdbc:postgresql://localhost:5432/" + dbName;
 
         jdbcConnection connection = new jdbcConnection(dbName, userName, password, URL);
-        return connection.getConnection();
+        return connection;
     }
 
     @Bean
     public QuestionsDAO questionsDAO() {
-        Connection databaseConnection = getConnection();
+        jdbcConnection databaseConnection = getConnection();
 
         return new QuestionsDaoJdbc(databaseConnection);
     }
 
     @Bean
     public AnswerDAO answerDAO() {
-        Connection databaseConnection = getConnection();
+        jdbcConnection databaseConnection = getConnection();
         return new AnswerDaoJdbc(databaseConnection);
     }
 }

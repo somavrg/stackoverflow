@@ -8,13 +8,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import com.codecool.stackoverflowtw.database.jdbcConnection;
 
 public class QuestionsDaoJdbc implements QuestionsDAO {
 
-    private final java.sql.Connection connection;
+    private final jdbcConnection jdbcConnection;
 
-    public QuestionsDaoJdbc(Connection connection) {
-        this.connection = connection;
+    public QuestionsDaoJdbc(jdbcConnection connection) {
+        this.jdbcConnection = connection;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
         List<Question> questions = new ArrayList<>();
         String sql = "SELECT id, title, description, date, score FROM questions";
 
-        try (Connection conn = connection;
+        try (Connection conn = jdbcConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             ResultSet res = pstmt.executeQuery();
@@ -56,7 +57,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
     public Question selectById(int id) {
         String sql = "SELECT id, title, description, date, score FROM questions WHERE id = ?";
 
-        try (Connection conn = connection;
+        try (Connection conn = jdbcConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
 
@@ -84,7 +85,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
     public boolean deleteQuestionById(int id) {
         String sql = "DELETE FROM questions WHERE id = ?";
 
-        try (Connection conn = connection) {
+        try (Connection conn = jdbcConnection.getConnection()) {
             assert conn != null;
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, id);
@@ -102,7 +103,7 @@ public class QuestionsDaoJdbc implements QuestionsDAO {
     public void addNewQuestion(NewQuestionDTO question) {
         String sql = "INSERT INTO questions (title, description, date) VALUES (?, ?, ?)";
 
-        try (Connection conn = connection) {
+        try (Connection conn = jdbcConnection.getConnection()) {
             assert conn != null;
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, question.title());

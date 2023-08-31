@@ -2,6 +2,7 @@ package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.NewAnswerDTO;
 import com.codecool.stackoverflowtw.dao.model.Answer;
+import com.codecool.stackoverflowtw.database.jdbcConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,19 +12,22 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import com.codecool.stackoverflowtw.database.jdbcConnection;
+
 
 public class AnswerDaoJdbc implements AnswerDAO {
-    private final java.sql.Connection connection;
+    private final jdbcConnection jdbcConnection;
 
-    public AnswerDaoJdbc(Connection connection) {
-        this.connection = connection;
+
+    public AnswerDaoJdbc(jdbcConnection connection) {
+        this.jdbcConnection = connection;
     }
 
     @Override
     public Answer selectAnswerById(int id) {
         String sql = "SELECT id,text,date,score FROM answers WHERE id = ?";
 
-        try (Connection conn = connection) {
+        try (Connection conn = jdbcConnection.getConnection()) {
             assert conn != null;
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, id);
@@ -44,7 +48,7 @@ public class AnswerDaoJdbc implements AnswerDAO {
     public List<Answer> selectAllById(int id) {
         List<Answer> answers = new ArrayList<>();
         String sql = "SELECT id,text,date,score FROM answers WHERE question_id = ?";
-        try (Connection conn = connection;
+        try (Connection conn = jdbcConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             ResultSet res = pstmt.executeQuery();
@@ -68,7 +72,7 @@ public class AnswerDaoJdbc implements AnswerDAO {
     public void deleteAllById(int id) {
         String sql = "DELETE FROM answers WHERE question_id = ?";
 
-        try (Connection conn = connection) {
+        try (Connection conn = jdbcConnection.getConnection()) {
             assert conn != null;
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, id);
@@ -85,7 +89,7 @@ public class AnswerDaoJdbc implements AnswerDAO {
     public void deleteAnswerById(int id) {
         String sql = "DELETE FROM answers WHERE answers.id = ?";
 
-        try (Connection conn = connection) {
+        try (Connection conn = jdbcConnection.getConnection()) {
             assert conn != null;
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, id);
@@ -101,7 +105,7 @@ public class AnswerDaoJdbc implements AnswerDAO {
     public void addNewAnswer(NewAnswerDTO answerDTO) {
         String sql = "INSERT INTO answers (text,date,question_id) VALUES (?, ?, ?)";
 
-        try (Connection conn = connection) {
+        try (Connection conn = jdbcConnection.getConnection()) {
             assert conn != null;
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, answerDTO.text());
