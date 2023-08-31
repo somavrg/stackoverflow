@@ -33,11 +33,6 @@ public class QuestionController {
         return questionService.getQuestionById(id);
     }
 
-    @GetMapping("/{id}/answers")
-    public List<AnswerDTO> getAnswersById(@PathVariable int id) {
-        return answerService.getAnswersById(id);
-    }
-
     @PostMapping("/")
     public int addNewQuestion(@RequestBody NewQuestionDTO question) {
         return questionService.addNewQuestion(question);
