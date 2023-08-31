@@ -2,7 +2,7 @@ package com.codecool.stackoverflowtw.dao;
 
 import com.codecool.stackoverflowtw.controller.dto.NewAnswerDTO;
 import com.codecool.stackoverflowtw.dao.model.Answer;
-import com.codecool.stackoverflowtw.database.jdbcConnection;
+import com.codecool.stackoverflowtw.database.JdbcConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,14 +12,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import com.codecool.stackoverflowtw.database.jdbcConnection;
 
 
-public class AnswerDaoJdbc implements AnswerDAO {
-    private final jdbcConnection jdbcConnection;
+public class AnswerDAOJdbc implements AnswerDAO {
+    private final JdbcConnection jdbcConnection;
 
 
-    public AnswerDaoJdbc(jdbcConnection connection) {
+    public AnswerDAOJdbc(JdbcConnection connection) {
         this.jdbcConnection = connection;
     }
 

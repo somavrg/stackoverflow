@@ -4,17 +4,16 @@ import com.codecool.stackoverflowtw.controller.dto.NewQuestionDTO;
 import com.codecool.stackoverflowtw.dao.model.Question;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import com.codecool.stackoverflowtw.database.jdbcConnection;
+import com.codecool.stackoverflowtw.database.JdbcConnection;
 
-public class QuestionsDaoJdbc implements QuestionsDAO {
+public class QuestionsDAOJdbc implements QuestionsDAO {
 
-    private final jdbcConnection jdbcConnection;
+    private final JdbcConnection jdbcConnection;
 
-    public QuestionsDaoJdbc(jdbcConnection connection) {
+    public QuestionsDAOJdbc(JdbcConnection connection) {
         this.jdbcConnection = connection;
     }
 
