@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import com.codecool.stackoverflowtw.database.JdbcConnection;
 
-public class QuestionsDaoJdbc implements QuestionsDAO {
+public class QuestionsDAOJdbc implements QuestionsDAO {
 
     private final JdbcConnection jdbcConnection;
 
-    public QuestionsDaoJdbc(JdbcConnection connection) {
+    public QuestionsDAOJdbc(JdbcConnection connection) {
         this.jdbcConnection = connection;
     }
 

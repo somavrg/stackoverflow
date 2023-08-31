@@ -3,7 +3,7 @@ package com.codecool.stackoverflowtw;
 import com.codecool.stackoverflowtw.dao.AnswerDAO;
 import com.codecool.stackoverflowtw.dao.AnswerDaoJdbc;
 import com.codecool.stackoverflowtw.dao.QuestionsDAO;
-import com.codecool.stackoverflowtw.dao.QuestionsDaoJdbc;
+import com.codecool.stackoverflowtw.dao.QuestionsDAOJdbc;
 import com.codecool.stackoverflowtw.database.JdbcConnection;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,7 +35,7 @@ public class StackoverflowTwApplication {
     public QuestionsDAO questionsDAO() {
         JdbcConnection databaseConnection = getConnection();
 
-        return new QuestionsDaoJdbc(databaseConnection);
+        return new QuestionsDAOJdbc(databaseConnection);
     }
 
     @Bean
