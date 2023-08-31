@@ -23,7 +23,7 @@ public class QuestionController {
         this.answerService = answerService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<QuestionDTO> getAllQuestions() {
         return questionService.getAllQuestions();
     }
@@ -31,11 +31,6 @@ public class QuestionController {
     @GetMapping("/{id}")
     public QuestionDTO getQuestionById(@PathVariable int id) {
         return questionService.getQuestionById(id);
-    }
-
-    @GetMapping("/{id}/answers")
-    public List<AnswerDTO> getAnswersById(@PathVariable int id) {
-        return answerService.getAnswersById(id);
     }
 
     @PostMapping("/")
