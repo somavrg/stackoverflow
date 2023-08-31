@@ -4,10 +4,7 @@ import com.codecool.stackoverflowtw.controller.dto.NewAnswerDTO;
 import com.codecool.stackoverflowtw.dao.model.Answer;
 import com.codecool.stackoverflowtw.database.JdbcConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -49,7 +46,7 @@ public class AnswerDAOJdbc implements AnswerDAO {
         String sql = "SELECT id,text,date,score FROM answers WHERE question_id = ?";
         try (Connection conn = jdbcConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
+            pstmt.setInt(1, id);
             ResultSet res = pstmt.executeQuery();
 
             while (res.next()) {
@@ -108,7 +105,7 @@ public class AnswerDAOJdbc implements AnswerDAO {
             assert conn != null;
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, answerDTO.text());
-                pstmt.setString(2, String.valueOf(LocalDate.now()));
+                pstmt.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
                 pstmt.setInt(3, answerDTO.questionID());
                 pstmt.executeUpdate();
 
