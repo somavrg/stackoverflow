@@ -23,7 +23,7 @@ public class QuestionController {
         this.answerService = answerService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<QuestionDTO> getAllQuestions() {
         return questionService.getAllQuestions();
     }
