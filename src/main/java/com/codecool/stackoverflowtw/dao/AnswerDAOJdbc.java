@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AnswerDaoJdbc implements AnswerDAO {
+public class AnswerDAOJdbc implements AnswerDAO {
     private final JdbcConnection jdbcConnection;
 
 
-    public AnswerDaoJdbc(JdbcConnection connection) {
+    public AnswerDAOJdbc(JdbcConnection connection) {
         this.jdbcConnection = connection;
     }
 
