@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("questions")
 public class QuestionController {
+
     private final QuestionService questionService;
     private final AnswerService answerService;
 
@@ -45,10 +47,14 @@ public class QuestionController {
     }
 
     @GetMapping("/numberOfQuestions")
-    public int getNumberOfQuestions() { return questionService.getNumberOfQuestions(); }
+    public int getNumberOfQuestions() {
+        return questionService.getNumberOfQuestions();
+    }
 
-    @PatchMapping("/{id}/{voteValue}")
-    public void voteQuestion(@PathVariable int id, @PathVariable int voteValue) {
-        questionService.voteQuestion(id, voteValue);
+    @PatchMapping("/vote")
+    public void voteQuestion(@RequestBody Map<String, Integer> vote) {
+        int id = vote.get("id");
+        int number = vote.get("number");
+        questionService.voteQuestion(id, number);
     }
 }
