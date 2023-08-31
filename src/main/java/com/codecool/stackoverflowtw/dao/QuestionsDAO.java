@@ -17,4 +17,5 @@ public interface QuestionsDAO {
     void addNewQuestion(NewQuestionDTO question);
 
     int getNumberOfQuestion();
+    void voteQuestion(int id, int voteNumber);
 }
