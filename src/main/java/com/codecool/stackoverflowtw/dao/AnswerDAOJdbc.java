@@ -43,7 +43,7 @@ public class AnswerDAOJdbc implements AnswerDAO {
     @Override
     public List<Answer> selectAllById(int id) {
         List<Answer> answers = new ArrayList<>();
-        String sql = "SELECT id,text,date,score FROM answers WHERE question_id = ?";
+        String sql = "SELECT id,text,date,score,question_id FROM answers WHERE question_id = ?";
         try (Connection conn = jdbcConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
