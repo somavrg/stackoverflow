@@ -139,4 +139,23 @@ public class AnswerDAOJdbc implements AnswerDAO {
         }
         return numberOfAnswers;
     }
+
+    @Override
+    public void voteAnswer(int id, int voteValue) {
+        String sql = "UPDATE answers SET score = score + voteValue";
+
+        try (Connection conn = jdbcConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet res = pstmt.executeQuery();
+
+            while (res.next()) {
+                int questionId = res.getInt("id");
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 }

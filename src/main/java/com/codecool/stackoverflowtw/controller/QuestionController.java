@@ -46,4 +46,9 @@ public class QuestionController {
 
     @GetMapping("/numberOfQuestions")
     public int getNumberOfQuestions() { return questionService.getNumberOfQuestions(); }
+
+    @PatchMapping("/{id}/{voteValue}")
+    public void voteQuestion(@PathVariable int id, @PathVariable int voteValue) {
+        questionService.voteQuestion(id, voteValue);
+    }
 }

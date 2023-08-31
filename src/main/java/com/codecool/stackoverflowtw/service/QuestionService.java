@@ -55,4 +55,6 @@ public class QuestionService {
     public int getNumberOfQuestions() {
         return questionsDAO.getNumberOfQuestion();
     }
+
+    public void voteQuestion(int id, int voteValue) { questionsDAO.voteQuestion(id, voteValue);}
 }
