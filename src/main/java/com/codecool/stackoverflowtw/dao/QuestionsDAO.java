@@ -15,4 +15,6 @@ public interface QuestionsDAO {
     boolean deleteQuestionById(int id);
 
     void addNewQuestion(NewQuestionDTO question);
+
+    int getNumberOfQuestion();
 }

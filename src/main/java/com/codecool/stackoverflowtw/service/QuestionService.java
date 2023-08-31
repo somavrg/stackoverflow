@@ -50,6 +50,9 @@ public class QuestionService {
     public int addNewQuestion(NewQuestionDTO question) {
         questionsDAO.addNewQuestion(question);
         return 0;
+    }
 
+    public int getNumberOfQuestions() {
+        return questionsDAO.getNumberOfQuestion();
     }
 }

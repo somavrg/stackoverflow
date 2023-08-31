@@ -116,6 +116,27 @@ public class AnswerDAOJdbc implements AnswerDAO {
         } catch (SQLException e) {
             throw new RuntimeException();
         }
+    }
 
+    @Override
+    public int getNumberOfAnswers() {
+        int numberOfAnswers = 0;
+        String sql = "SELECT id FROM answers";
+
+        try (Connection conn = jdbcConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet res = pstmt.executeQuery();
+
+            while (res.next()) {
+                int answerId = res.getInt("id");
+                numberOfAnswers++;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return numberOfAnswers;
     }
 }

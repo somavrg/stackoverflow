@@ -43,4 +43,7 @@ public class QuestionController {
         answerService.deleteAllByQuestionId(id);
         return questionService.deleteQuestionById(id);
     }
+
+    @GetMapping("/numberOfQuestions")
+    public int getNumberOfQuestions() { return questionService.getNumberOfQuestions(); }
 }

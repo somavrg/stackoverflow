@@ -14,4 +14,5 @@ public interface AnswerDAO {
     void deleteAnswerById(int id);
 
     void addNewAnswer(NewAnswerDTO newAnswerDTO);
+    int getNumberOfAnswers();
 }

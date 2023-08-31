@@ -115,4 +115,27 @@ public class QuestionsDAOJdbc implements QuestionsDAO {
             throw new RuntimeException();
         }
     }
+
+    @Override
+    public int getNumberOfQuestion() {
+        int numberOfQuestions = 0;
+        String sql = "SELECT id FROM questions";
+
+        try (Connection conn = jdbcConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet res = pstmt.executeQuery();
+
+            while (res.next()) {
+                int questionId = res.getInt("id");
+                numberOfQuestions++;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return numberOfQuestions;
+    }
 }

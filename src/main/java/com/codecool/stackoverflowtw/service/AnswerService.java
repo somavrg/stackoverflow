@@ -55,5 +55,7 @@ public class AnswerService {
         answerDAO.addNewAnswer(newAnswerDTO);
     }
 
-
+    public int getNumberOfAnswers() {
+        return answerDAO.getNumberOfAnswers();
+    }
 }
