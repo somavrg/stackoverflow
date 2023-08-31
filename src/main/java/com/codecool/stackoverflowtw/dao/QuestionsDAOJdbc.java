@@ -25,7 +25,7 @@ public class QuestionsDAOJdbc implements QuestionsDAO {
     @Override
     public List<Question> selectAll() {
         List<Question> questions = new ArrayList<>();
-        String sql = "SELECT id, title, description, date, score FROM questions";
+        String sql = "SELECT id, title, description, date, score FROM questions ORDER BY date DESC";
 
         try (Connection conn = jdbcConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
