@@ -22,3 +22,4 @@ only contains the backend portion of the application.
 ## Usage
 As it was mentioned previously this repo only contains the backend part of the application, 
 the endpoints efficient work can be only tested with Postman. 
+
